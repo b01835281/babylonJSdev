@@ -5,7 +5,7 @@ function createBox(scene) {
     return box;
 }
 function createLight(scene) {
-    const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+    let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
     return light;
 }

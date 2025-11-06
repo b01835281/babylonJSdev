@@ -19,17 +19,44 @@ import {
     return box;
   }
 
+  function createCylinder(scene: Scene) {
+    const cylinder = MeshBuilder.CreateBox("cylinder",{size: 1}, scene);
+    cylinder.position.x= 3;
+    cylinder.position.y=1;
+    return cylinder;
+  }
+
+  function createCone(scene: Scene) {
+    const cone = MeshBuilder.CreateBox("cone",{size: 1}, scene);
+    cone.position.x= 1;
+    cone.position.y= 7;
+    return cone;
+  }
+
+  function createTriangle(scene: Scene) {
+    const triangle = MeshBuilder.CreateBox("triangle",{size: 1}, scene);
+    triangle.position.x= 6;
+    triangle.position.y=4;
+    return triangle;
+  }
+
+  function createCapsule(scene: Scene) {
+    const capsule = MeshBuilder.CreateBox("capsule",{size: 1}, scene);
+    capsule.position.x= 6;
+    capsule.position.y=4;
+    return capsule;
+  }
   
   function createLight(scene: Scene) {
-    let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+    const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
     return light;
   }
   
   function createSphere(scene: Scene) {
-    let sphere = MeshBuilder.CreateSphere(
-      "sphere",
-      { diameter: 2, segments: 32 },
+    const sphere = MeshBuilder.CreateSphere(
+      "ellipsoid",
+      { diameter: 0.7, diameterY:3, segments: 32 },
       scene,
     );
     sphere.position.x = 0;
@@ -38,13 +65,14 @@ import {
   }
   
   function createGround(scene: Scene) {
-    let ground = MeshBuilder.CreateGround(
+    const ground = MeshBuilder.CreateGround(
       "ground",
       { width: 6, height: 6 },
       scene,
     );
     return ground;
   }
+
   
   function createArcRotateCamera(scene: Scene) {
     let camAlpha = -Math.PI / 2,
@@ -71,6 +99,10 @@ import {
       sphere?: Mesh;
       ground?: Mesh;
       camera?: Camera;
+      cylinder?: Mesh;
+      cone?: Mesh;
+      triangle?: Mesh;
+      capsule?: Mesh;
     }
   
     let that: SceneData = { scene: new Scene(engine) };
@@ -81,5 +113,9 @@ import {
     that.sphere = createSphere(that.scene);
     that.ground = createGround(that.scene);
     that.camera = createArcRotateCamera(that.scene);
+    that.cylinder = createCylinder(that.scene);
+    that.cone = createCone(that.scene);
+    that.triangle = createTriangle(that.scene);
+    that.capsule = createCapsule(that.scene);
     return that;
   }
