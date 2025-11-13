@@ -48,7 +48,7 @@ export default function createRunScene(runScene: SceneData) {
     10000,
     0.1
   );
-  runScene.audio.stop();
+  
 
   // add baked in animations to player
   runScene.player.then((result) => {
@@ -57,16 +57,7 @@ export default function createRunScene(runScene: SceneData) {
   });
 
   runScene.scene.onBeforeRenderObservable.add(() => {
-    // check and respond to keypad presses
 
-    if (getKeyDown() == 1 && (keyDownMap["m"] || keyDownMap["M"])) {
-      keyDownHeld();
-      if (runScene.audio.isPlaying) {
-        runScene.audio.stop();
-      } else {
-        runScene.audio.play();
-      }
-    }
 
     runScene.player.then((result) => {
       let characterMoving: Boolean = false;
