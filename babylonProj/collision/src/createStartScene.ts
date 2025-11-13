@@ -16,24 +16,6 @@ import {
   Sound
 } from "@babylonjs/core";
 
-function backgroundMusic(scene: Scene): Sound{
-  let music = new Sound("music", "./assets/audio/arcade-kid.mp3", scene,  null ,
-   {
-      loop: true,
-      autoplay: true
-  });
-
-  Engine.audioEngine!.useCustomUnlockedButton = true;
-
-  // Unlock audio on first user interaction.
-  window.addEventListener('click', () => {
-    if(!Engine.audioEngine!.unlocked){
-        Engine.audioEngine!.unlock();
-    }
-}, { once: true });
-  return music;
-}
-
 function createGround(scene: Scene) {
   const groundMaterial = new StandardMaterial("groundMaterial");
   const groundTexture = new Texture("./assets/textures/wood.jpg");
@@ -90,3 +72,40 @@ function createArcRotateCamera(scene: Scene) {
   return camera;
 }
 
+function importMeshA(scene: Scene, x: number, y: number) {
+  let item: Promise<void | ISceneLoaderAsyncResult> =
+    SceneLoader.ImportMeshAsync(
+      "",
+      "./assets/models/men/",
+      "dummy3.babylon",
+      scene
+    );
+
+  item.then((result) => {
+    let character: AbstractMesh = result!.meshes[0];
+    character.position.x = x;
+    character.position.y = y + 0.1;
+    character.scaling = new Vector3(1, 1, 1);
+    character.rotation = new Vector3(0, 1.5, 0);
+  });
+  return item;
+}
+
+export default function createStartScene(engine: Engine) {
+  let scene = new Scene(engine);
+  //let audio = backgroundMusic(scene);
+  let lightHemispheric = createHemisphericLight(scene);
+  let camera = createArcRotateCamera(scene);
+  let player = importMeshA(scene, 0, 0);
+  let ground = createGround(scene);
+
+  let that: SceneData = {
+    scene,
+    //audio,
+    lightHemispheric,
+    camera,
+    player,
+    ground,
+  };
+  return that;
+}
