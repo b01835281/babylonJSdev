@@ -1,14 +1,11 @@
 import { AbstractMesh, ActionManager, CubeTexture } from "@babylonjs/core";
-import { SceneData } from "./interfaces ";
+import { SceneData } from "./interfaces";
 import {
   keyActionManager,
   keyDownMap,
   keyDownHeld,
   getKeyDown,
 } from "./keyActionManager";
-
-
-import { SceneData } from "./interfaces";
 
 
 export default function createRunScene(runScene: SceneData) {
@@ -26,20 +23,10 @@ export default function createRunScene(runScene: SceneData) {
     0.1
   );
 
-  runScene.audio.stop();
   runScene.scene.onBeforeRenderObservable.add(() => {
-    // check and respond to keypad presses
 
-    if (getKeyDown() == 1 && (keyDownMap["m"] || keyDownMap["M"])) {
-      keyDownHeld();
-      if (runScene.audio.isPlaying) {
-        runScene.audio.stop();
-      } else {
-        runScene.audio.play();
-      }
-    }
 
-        runScene.player.then((result) => {
+    runScene.player.then((result) => {
       let character: AbstractMesh = result!.meshes[0];
       if (keyDownMap["w"] || keyDownMap["ArrowUp"]) {
         character.position.x -= 0.1;
@@ -61,15 +48,15 @@ export default function createRunScene(runScene: SceneData) {
   });
 
 
-  runScene.scene.onAfterRenderObservable.add(() => {});
+  runScene.scene.onAfterRenderObservable.add(() => { });
 }
 
 
 
 //---------------------------
 
-export default function createRunScene(runScene: SceneData) {
- 
+//export default function createRunScene(runScene: SceneData) {
 
-  runScene.scene.onAfterRenderObservable.add(() => {});
-}
+
+//  runScene.scene.onAfterRenderObservable.add(() => { });
+//}
