@@ -1,6 +1,6 @@
 import { Scene, ArcRotateCamera, Vector3, HemisphericLight, MeshBuilder, } from "@babylonjs/core";
 function createBox(scene) {
-    let box = MeshBuilder.CreateBox("box", { size: 1 }, scene);
+    const box = MeshBuilder.CreateBox("box", { size: 1 }, scene);
     box.position.y = 3;
     return box;
 }
@@ -11,6 +11,7 @@ function createLight(scene) {
 }
 function createSphere(scene) {
     let sphere = MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
+    sphere.position.x = 0;
     sphere.position.y = 1;
     return sphere;
 }
