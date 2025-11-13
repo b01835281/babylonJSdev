@@ -3,6 +3,7 @@ import createStartScene from "./createStartScene";
 import createRunScene from "./createRunScene";
 import "./main.css";
 
+
 const CanvasName = "renderCanvas";
 
 let canvas = document.createElement("canvas");
