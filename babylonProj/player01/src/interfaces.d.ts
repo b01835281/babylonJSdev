@@ -1,22 +1,13 @@
 import {
-    Scene,
-    ArcRotateCamera,
-    AssetsManager,
-    Vector3,
-    HemisphericLight,
-    PointLight,
-    MeshBuilder,
-    Mesh,
-    Light,
-    Camera,
-    Engine,
-    Color3,
+  Scene,
+  Mesh,
+  HemisphericLight,
+  Camera,
 } from "@babylonjs/core";
 
 export interface SceneData {
-  scene: Scene;
-  // audio: Sound;
-  lightHemispheric: HemisphericLight;
-  camera: Camera;
-  ground: Mesh;
+      scene: Scene;
+      light?: HemisphericLight;
+      ground?: Mesh;
+      camera?: Camera;
 }

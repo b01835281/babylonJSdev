@@ -14,4 +14,4 @@ let eng = new Engine(canvas, true, {}, true);
 let startScene = createStartScene(eng);
 eng.runRenderLoop(() => {
     startScene.scene.render();
-});        
+});   
