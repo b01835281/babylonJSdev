@@ -7,10 +7,20 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview --host",
-    "motion03build": "tsc && vite build motion03",
-    "motion03preview": "vite preview motion03 --host",
-    "collision03build": "vite build collision03v2",
-    "collision03preview": "vite preview collision03v2 --host"
+    "meshes01build": "tsc && vite build meshes01",
+    "meshes01preview": "vite preview mesthes01 --host",
+    "collision03build": "tsc && vite build collision03",
+    "collision03preview": "vite preview collision03 --host",
+    "villagebuild": "tsc && vite build village",
+    "villagepreview": "vite preview village --host",
+    "player04build": "tsc && vite build player04",
+    "player04preview": "vite preview player04 --host",
+    "multibuild": "tsc && vite build multi",
+    "multipreview": "vite preview multi --host"
+    
+
+
+
 
   },
   "devDependencies": {
