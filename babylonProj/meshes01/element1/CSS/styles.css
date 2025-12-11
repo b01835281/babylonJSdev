@@ -1,0 +1,38 @@
+h1{
+    color:red;
+    margin-left:40px;
+}
+
+p {
+    color:pink;
+}
+
+div.buttons {
+    width: 300px;
+    height: 200px;
+    border-style: dotted solid double;
+}
+
+button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: lime;
+    background-color: purple;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px yellow;
+}
+
+.button:hover {
+    background-color: magenta}
+
+.button:active {
+    background-color: black;
+    box-shadow: 0 5px orange;
+    transform: translateY(4px);
+}
