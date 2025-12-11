@@ -3,52 +3,43 @@
 import {
     Scene,
     ArcRotateCamera,
+    Quaternion,
     Vector3,
     HemisphericLight,
     MeshBuilder,
     Mesh,
     Light,
     Camera,
-    Engine,
     StandardMaterial,
     Texture,
-    Color3
+    Engine,
+    Color3,
+    ThinGrainPostProcess,
   } from "@babylonjs/core";
   
   
-  function createCylinder(scene: Scene) {
-    let cylinder = MeshBuilder.CreateCylinder(
-      "cylinder",
-      { height: 1, diameter: 0.7 },
-      scene
-    );
-    cylinder.position.x = 1;
-    cylinder.position.y = 1;
-    cylinder.position.z = 1;
-  
+  function createBox(scene: Scene) {
+    let box = MeshBuilder.CreateBox("box",{size: 2}, scene);
+    box.position.y = 1;
+
     var texture = new StandardMaterial("reflective", scene);
-    texture.ambientTexture = new Texture("./assets/reflectivity.png", scene);
-    texture.diffuseColor = new Color3(1, 1, 1);
-    cylinder.material = texture;
-    return cylinder;
+        texture.ambientTexture = new Texture("./assets/reflectivity.png", scene);
+        texture.diffuseColor = new Color3(1, 1, 1);
+        box.material = texture;
+
+    return box;
   }
+
+
 
   
   function createLight(scene: Scene) {
     const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
-    light.intensity = 0.7;
+    light.intensity = 0.8;
+    light.diffuse = new Color3(0, 1, 0);
     return light;
   }
   
-  function createSphere(scene: Scene) {
-    let sphere = MeshBuilder.CreateSphere(
-      "sphere",
-      { diameter: 2, segments: 32 },
-      scene,
-    );
-    sphere.position.y = 1;
-    return sphere;
-  }
   
   function createGround(scene: Scene) {
     let ground = MeshBuilder.CreateGround(
@@ -79,20 +70,40 @@ import {
   export default function createStartScene(engine: Engine) {
     interface SceneData {
       scene: Scene;
-      cylinder?: Mesh;
+      box?: Mesh;
       light?: Light;
       sphere?: Mesh;
       ground?: Mesh;
       camera?: Camera;
     }
+
+    // rotate box
+    let boxAngle: number = -0.6;
+    let boxSpeed: number = -0.01;
   
     let that: SceneData = { scene: new Scene(engine) };
     // that.scene.debugLayer.show();
   
-    that.cylinder = createCylinder(that.scene);
+    that.box = createBox(that.scene);
     that.light = createLight(that.scene);
-    that.sphere = createSphere(that.scene);
     that.ground = createGround(that.scene);
     that.camera = createArcRotateCamera(that.scene);
-    return that;
+    
+
+
+
+    that.scene.onAfterRenderObservable.add(() => {
+    // rotate box
+    const axis: Vector3 = new Vector3(0, 1, 0).normalize();
+    const quat: Quaternion = Quaternion.RotationAxis(
+      axis,
+      boxAngle * 2 * Math.PI
+    );
+    that.box!.rotationQuaternion = quat;
+    boxAngle += boxSpeed;
+    boxAngle %= 1;
+  });
+
+
+return that;
   }
