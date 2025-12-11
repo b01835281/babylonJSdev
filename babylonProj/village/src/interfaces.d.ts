@@ -8,7 +8,7 @@ import {
 export interface SceneData {
   scene: Scene;
   ground: Mesh;
-  sky?: Mesh;
+  sky: Mesh;
   lightHemispheric: HemisphericLight;
   camera: Camera;
 }

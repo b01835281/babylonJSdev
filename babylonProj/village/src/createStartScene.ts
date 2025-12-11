@@ -16,7 +16,7 @@ import {
   Vector4,
   InstancedMesh,
   SpriteManager,
-  Sprite
+  Sprite,
 } from "@babylonjs/core";
 
 function createTerrain(scene: Scene) {
@@ -64,11 +64,10 @@ function createSky(scene: Scene) {
   const skyboxMaterial = new StandardMaterial("skyBox", scene);
   skyboxMaterial.backFaceCulling = false;
   skyboxMaterial.reflectionTexture = new CubeTexture(
-    "../assets/textures/skybox/skybox",
+    "./assets/textures/skybox/skybox",
     scene
   );
-  skyboxMaterial.reflectionTexture.coordinatesMode =
-    Texture.SKYBOX_MODE;
+  skyboxMaterial.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE;
   skyboxMaterial.diffuseColor = new Color3(0, 0, 0);
   skyboxMaterial.specularColor = new Color3(0, 0, 0);
   skybox.material = skyboxMaterial;
@@ -80,7 +79,7 @@ function createBox(style: number) {
   const boxMat = new StandardMaterial("boxMat");
   const faceUV: Vector4[] = []; // faces for small house
   if (style == 1) {
-    boxMat.diffuseTexture = new Texture("../assets/textures/cubehouse.png");
+    boxMat.diffuseTexture = new Texture("./assets/textures/cubehouse.png");
     faceUV[0] = new Vector4(0.5, 0.0, 0.75, 1.0); //rear face
     faceUV[1] = new Vector4(0.0, 0.0, 0.25, 1.0); //front face
     faceUV[2] = new Vector4(0.25, 0, 0.5, 1.0); //right side
@@ -88,7 +87,7 @@ function createBox(style: number) {
     // faceUV[4] would be for bottom but not used
     // faceUV[5] would be for top but not used
   } else {
-    boxMat.diffuseTexture = new Texture("../assets/textures/semihouse.png");
+    boxMat.diffuseTexture = new Texture("./assets/textures/semihouse.png");
     faceUV[0] = new Vector4(0.6, 0.0, 1.0, 1.0); //rear face
     faceUV[1] = new Vector4(0.0, 0.0, 0.4, 1.0); //front face
     faceUV[2] = new Vector4(0.4, 0, 0.6, 1.0); //right side
@@ -96,7 +95,7 @@ function createBox(style: number) {
     // faceUV[4] would be for bottom but not used
     // faceUV[5] would be for top but not used
   }
-  
+
   const box = MeshBuilder.CreateBox("box", {
     width: style,
     height: 1,
@@ -120,7 +119,7 @@ function createRoof(style: number) {
   roof.rotation.z = Math.PI / 2;
   roof.position.y = 1.22;
   const roofMat = new StandardMaterial("roofMat");
-  roofMat.diffuseTexture = new Texture("../assets/textures/roof.jpg");
+  roofMat.diffuseTexture = new Texture("./assets/textures/roof.jpg");
   roof.material = roofMat;
   return roof;
 }
@@ -202,7 +201,7 @@ function createHouses(scene: Scene, style: number) {
 function createTrees(scene: Scene) {
   const spriteManagerTrees = new SpriteManager(
     "treesManager",
-    "../assets/sprites/tree.png",
+    "./assets/sprites/tree.png",
     2000,
     { width: 512, height: 1024 },
     scene
@@ -263,23 +262,21 @@ function createArcRotateCamera(scene: Scene) {
 }
 
 export default function createStartScene(engine: Engine) {
-  const scene   = new Scene(engine);
-  const ground  = createGround(scene);
-  const sky     = createSky(scene);
-  const lightHemispheric = createHemisphericLight(scene);
-  //const house = createHouse(scene, 1);
+  let scene = new Scene(engine);
+  let ground = createGround(scene);
+  let sky = createSky(scene);
+  let lightHemispheric = createHemisphericLight(scene);
   createHouses(scene, 3);
   createTrees(scene);
   createTerrain(scene);
-  let camera  = createArcRotateCamera(scene);
-
+  let camera = createArcRotateCamera(scene);
 
   let that: SceneData = {
     scene,
     ground,
     sky,
     lightHemispheric,
-    camera
+    camera,
   };
   return that;
 }
