@@ -54,7 +54,7 @@ import {
     box.position.y = 1;
 
     var texture = new StandardMaterial("reflective", scene);
-    texture.ambientTexture = new Texture("../assets/rabbit.jpg", scene);
+    texture.ambientTexture = new Texture("./assets/reflectivity.jpg", scene);
     texture.diffuseColor = new Color3(1, 1, 1);
     box.material = texture;
     
